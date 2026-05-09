@@ -32,11 +32,16 @@ create policy "items_write" on public.items
   );
 
 -- UPDATE policy for items (approve/reject/sell)
+-- Note: 'active' is NOT allowed — prevents parent self-approval
+-- Approval action will be handled via SECURITY DEFINER function
 create policy "items_update" on public.items
   for update using (
     seller_child_id in (
       select id from public.children where parent_id = auth.uid()
     )
+  )
+  with check (
+    status in ('draft', 'pending', 'rejected', 'reserved', 'sold')
   );
 
 -- 채팅방 접근: 구매자 또는 판매자 보호자만
@@ -56,10 +61,12 @@ create policy "messages_read" on public.messages
     )
   );
 
--- 메시지 쓰기: 채팅방 참여자만
+-- 메시지 쓰기: 채팅방 참여자만 (child impersonation 방지)
+-- sender_child_id 검증 추가: 부모의 자녀만 발신 가능
 create policy "messages_write" on public.messages
   for insert with check (
-    room_id in (
+    sender_child_id in (select id from public.children where parent_id = auth.uid())
+    and room_id in (
       select id from public.chat_rooms where
         buyer_child_id in (select id from public.children where parent_id = auth.uid())
         or seller_child_id in (select id from public.children where parent_id = auth.uid())
@@ -76,4 +83,33 @@ create policy "trades_access" on public.trades
   for all using (
     seller_child_id in (select id from public.children where parent_id = auth.uid())
     or buyer_child_id in (select id from public.children where parent_id = auth.uid())
+  );
+
+-- 상품 이미지 RLS
+alter table public.item_images enable row level security;
+
+create policy "item_images_read" on public.item_images
+  for select using (
+    item_id in (select id from public.items where status = 'active')
+    or item_id in (
+      select id from public.items where seller_child_id in (
+        select id from public.children where parent_id = auth.uid()
+      )
+    )
+  );
+
+create policy "item_images_write" on public.item_images
+  for insert with check (
+    item_id in (
+      select id from public.items where seller_child_id in (
+        select id from public.children where parent_id = auth.uid()
+      )
+    )
+  );
+
+-- 채팅방 생성: 구매자만, active 상품만 (Fix 6)
+create policy "chat_rooms_insert" on public.chat_rooms
+  for insert with check (
+    buyer_child_id in (select id from public.children where parent_id = auth.uid())
+    and item_id in (select id from public.items where status = 'active')
   );

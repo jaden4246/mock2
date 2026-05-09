@@ -13,12 +13,12 @@ create table public.children (
   nickname text not null,
   avatar text default 'lion',
   school_name text,
-  grade smallint,
+  grade smallint check (grade between 1 and 6),
   district text,
   lat numeric(9,6),
   lng numeric(9,6),
   seed_points integer default 0,
-  badge_level text default 'sprout',
+  badge_level text default 'sprout' check (badge_level in ('sprout', 'fruit', 'tree', 'forest')),
   created_at timestamptz default now()
 );
 
