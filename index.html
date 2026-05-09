@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아이마켓 — 아동 전용 중고거래 플랫폼</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-dark:  #1B4F8A;
+  --blue:       #2E75B6;
+  --blue-light: #5BA3E0;
+  --blue-pale:  #EAF3FB;
+  --green:      #34C759;
+  --green-dark: #28A745;
+  --orange:     #FF9500;
+  --red:        #FF3B30;
+  --bg:         #F5F8FF;
+  --white:      #FFFFFF;
+  --text:       #1A1A2E;
+  --text-mid:   #4A5568;
+  --text-light: #8896AB;
+  --border:     #E2EAF4;
+  --radius:     16px;
+  --shadow:     0 4px 24px rgba(30,75,138,.10);
+  --shadow-lg:  0 12px 48px rgba(30,75,138,.16);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── NAV ────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 900; font-size: 1.3rem; color: var(--blue-dark);
+  text-decoration: none;
+}
+.nav-logo .logo-icon {
+  width: 36px; height: 36px; background: var(--blue);
+  border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.1rem;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  color: var(--text-mid); text-decoration: none;
+  font-size: .9rem; font-weight: 500;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-cta {
+  background: var(--blue); color: #fff;
+  padding: 8px 20px; border-radius: 24px;
+  font-size: .9rem; font-weight: 700; text-decoration: none;
+  transition: background .2s;
+}
+.nav-cta:hover { background: var(--blue-dark); }
+
+/* ── SECTIONS ───────────────────────────────── */
+section { padding: 100px 5%; }
+.section-label {
+  font-size: .8rem; font-weight: 700; letter-spacing: 2px;
+  color: var(--blue); text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-size: 2.4rem; font-weight: 900; line-height: 1.25;
+  color: var(--text); margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 1.05rem; color: var(--text-mid); max-width: 560px;
+  margin-bottom: 48px;
+}
+
+/* ── HERO ───────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2d5e 0%, #1B4F8A 40%, #2E75B6 80%, #5BA3E0 100%);
+  display: flex; align-items: center;
+  padding-top: 80px; padding-bottom: 60px;
+  position: relative; overflow: hidden;
+}
+.hero-float {
+  position: absolute; font-size: 3rem; opacity: .12;
+  animation: floaty 6s ease-in-out infinite;
+  user-select: none;
+}
+.hero-float:nth-child(1) { top:12%; left:8%;  animation-delay:0s; }
+.hero-float:nth-child(2) { top:60%; left:6%;  animation-delay:1.2s; }
+.hero-float:nth-child(3) { top:20%; right:10%;animation-delay:0.7s; }
+.hero-float:nth-child(4) { top:70%; right:12%;animation-delay:1.8s; }
+.hero-float:nth-child(5) { top:40%; left:50%; animation-delay:2.5s; }
+@keyframes floaty {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50%      { transform: translateY(-20px) rotate(5deg); }
+}
+.hero-content { max-width: 700px; position: relative; z-index: 2; }
+.hero-badge {
+  display: inline-block; background: rgba(255,255,255,.15);
+  color: #fff; padding: 6px 16px; border-radius: 24px;
+  font-size: .85rem; font-weight: 600; margin-bottom: 28px;
+  border: 1px solid rgba(255,255,255,.25);
+}
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 900; color: #fff; line-height: 1.18;
+  margin-bottom: 24px;
+}
+.hero-title span { color: #7ECBFF; }
+.hero-sub {
+  font-size: 1.15rem; color: rgba(255,255,255,.82);
+  margin-bottom: 40px; line-height: 1.7;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: #fff; color: var(--blue-dark);
+  padding: 14px 32px; border-radius: 30px;
+  font-weight: 800; font-size: 1rem; text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,.25);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+.btn-secondary {
+  border: 2px solid rgba(255,255,255,.5); color: #fff;
+  padding: 14px 32px; border-radius: 30px;
+  font-weight: 700; font-size: 1rem; text-decoration: none;
+  transition: background .2s;
+}
+.btn-secondary:hover { background: rgba(255,255,255,.15); }
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 56px;
+  flex-wrap: wrap;
+}
+.hero-stat { color: #fff; }
+.hero-stat .num {
+  font-size: 2rem; font-weight: 900; display: block; color: #7ECBFF;
+}
+.hero-stat .label { font-size: .85rem; opacity: .75; }
+
+/* ── PROBLEM ────────────────────────────────── */
+#problem { background: #13213E; }
+#problem .section-label { color: #7ECBFF; }
+#problem .section-title { color: #fff; }
+#problem .section-sub   { color: rgba(255,255,255,.65); }
+.problem-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.problem-card {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius); padding: 32px;
+  transition: transform .2s, background .2s;
+}
+.problem-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.1); }
+.problem-icon { font-size: 2.4rem; margin-bottom: 20px; }
+.problem-card h3 { font-size: 1.15rem; color: #fff; font-weight: 700; margin-bottom: 12px; }
+.problem-card p  { font-size: .95rem; color: rgba(255,255,255,.65); line-height: 1.65; }
+.problem-card .stat {
+  margin-top: 20px; padding: 12px 16px;
+  background: rgba(126,203,255,.12); border-radius: 10px;
+  color: #7ECBFF; font-size: .88rem; font-weight: 600;
+}
+
+/* ── SOLUTION ───────────────────────────────── */
+#solution { background: var(--white); }
+.flow-wrap {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap; margin-top: 48px;
+}
+.flow-step {
+  text-align: center; padding: 28px 24px;
+  background: var(--bg); border-radius: var(--radius);
+  width: 190px; border: 2px solid var(--border);
+  transition: border-color .2s, transform .2s;
+}
+.flow-step:hover { border-color: var(--blue); transform: translateY(-4px); }
+.flow-step .step-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.flow-step .step-num {
+  display: inline-block; background: var(--blue); color: #fff;
+  width: 24px; height: 24px; border-radius: 50%;
+  font-size: .75rem; font-weight: 800; line-height: 24px;
+  margin-bottom: 10px;
+}
+.flow-step h4 { font-size: .95rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.flow-step p  { font-size: .82rem; color: var(--text-mid); }
+.flow-arrow {
+  font-size: 1.6rem; color: var(--blue-light);
+  margin: 0 8px; flex-shrink: 0;
+}
+
+/* ── FEATURES ───────────────────────────────── */
+#features { background: var(--bg); }
+.feature-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.feature-card {
+  background: var(--white); border-radius: var(--radius);
+  padding: 32px; border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.feature-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 20px;
+}
+.fi-1 { background: #EAF3FB; }
+.fi-2 { background: #F0FBF0; }
+.fi-3 { background: #FFF8EA; }
+.fi-4 { background: #FAF0FB; }
+.feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.feature-card p  { font-size: .92rem; color: var(--text-mid); line-height: 1.65; }
+.feature-card ul { margin-top: 14px; padding-left: 0; list-style: none; }
+.feature-card ul li {
+  font-size: .88rem; color: var(--text-mid);
+  padding: 4px 0; display: flex; align-items: flex-start; gap: 8px;
+}
+.feature-card ul li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink:0; }
+
+/* ── MARKET ─────────────────────────────────── */
+#market { background: var(--white); }
+.market-layout { display: flex; gap: 60px; align-items: center; flex-wrap: wrap; }
+.market-circles { position: relative; flex-shrink: 0; }
+.circle {
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; flex-direction: column;
+  text-align: center; position: relative;
+}
+.c-tam {
+  width: 300px; height: 300px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+  color: #fff;
+}
+.c-sam {
+  width: 220px; height: 220px;
+  background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+  color: #fff;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}
+.c-som {
+  width: 140px; height: 140px;
+  background: linear-gradient(135deg, #0f2d5e 0%, var(--blue-dark) 100%);
+  color: #fff;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}
+.circle .c-label { font-size: .7rem; font-weight: 700; opacity: .8; letter-spacing: 1px; }
+.circle .c-val   { font-size: 1.4rem; font-weight: 900; line-height: 1.2; }
+.circle .c-desc  { font-size: .68rem; opacity: .75; margin-top: 2px; }
+.market-stats { flex: 1; min-width: 280px; }
+.market-stat-item {
+  padding: 20px 24px; background: var(--bg); border-radius: var(--radius);
+  border-left: 4px solid var(--blue); margin-bottom: 16px;
+}
+.market-stat-item .m-num { font-size: 1.9rem; font-weight: 900; color: var(--blue-dark); }
+.market-stat-item .m-label { font-size: .9rem; color: var(--text-mid); margin-top: 2px; }
+
+/* ── BIZMODEL ───────────────────────────────── */
+#bizmodel { background: var(--bg); }
+.phase-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px; position: relative;
+}
+.phase-card {
+  background: var(--white); border-radius: var(--radius);
+  padding: 32px; border: 1px solid var(--border);
+  box-shadow: var(--shadow); position: relative; overflow: hidden;
+}
+.phase-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+}
+.ph-1::before { background: linear-gradient(90deg, var(--blue), var(--blue-light)); }
+.ph-2::before { background: linear-gradient(90deg, var(--green-dark), var(--green)); }
+.ph-3::before { background: linear-gradient(90deg, var(--orange), #FFCC00); }
+.phase-num {
+  font-size: .75rem; font-weight: 800; letter-spacing: 1.5px;
+  color: var(--text-light); margin-bottom: 8px;
+}
+.phase-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; }
+.phase-card .phase-period {
+  font-size: .82rem; color: var(--text-light); margin-bottom: 16px;
+}
+.phase-card ul { list-style: none; }
+.phase-card ul li {
+  font-size: .9rem; color: var(--text-mid);
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.phase-card ul li:last-child { border-bottom: none; }
+.phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.d-1 { background: var(--blue); }
+.d-2 { background: var(--green); }
+.d-3 { background: var(--orange); }
+.phase-revenue {
+  margin-top: 20px; padding: 14px 16px;
+  border-radius: 10px; font-weight: 700;
+}
+.pr-1 { background: var(--blue-pale); color: var(--blue-dark); }
+.pr-2 { background: #F0FBF0; color: var(--green-dark); }
+.pr-3 { background: #FFF8EA; color: #8B5E00; }
+
+/* ── COMPETITION MAP ────────────────────────── */
+#competition { background: var(--white); }
+.comp-layout { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; }
+.pos-map-wrap { flex-shrink: 0; }
+.pos-map {
+  width: 380px; height: 380px; border-radius: var(--radius);
+  border: 2px solid var(--border); position: relative;
+  background: var(--bg); overflow: hidden;
+}
+.pos-axis-h {
+  position: absolute; top: 50%; left: 0; right: 0;
+  height: 1px; background: var(--border);
+}
+.pos-axis-v {
+  position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.pos-label {
+  position: absolute; font-size: .72rem; font-weight: 700;
+  color: var(--text-light); letter-spacing: .5px;
+}
+.pos-top    { top: 12px; left: 50%; transform: translateX(-50%); }
+.pos-bottom { bottom: 12px; left: 50%; transform: translateX(-50%); }
+.pos-left   { left: 12px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+.pos-right  { right: 12px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+.pos-dot {
+  position: absolute; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transform: translate(-50%,-50%);
+  font-weight: 800; font-size: .75rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  cursor: default;
+}
+.pos-aimarket {
+  width: 72px; height: 72px;
+  background: var(--blue); color: #fff;
+  left: 72%; top: 22%;
+  font-size: .72rem; text-align: center;
+  line-height: 1.2; padding: 4px;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(46,117,182,.5); }
+  50%      { box-shadow: 0 0 0 12px rgba(46,117,182,0); }
+}
+.pos-karrot  { width: 52px; height: 52px; background: #FF7002; color:#fff; left:65%; top:70%; }
+.pos-bungae  { width: 48px; height: 48px; background: #1DC1A5; color:#fff; left:58%; top:78%; }
+.pos-jungo   { width: 44px; height: 44px; background: #888; color:#fff; left:50%; top:80%; }
+.comp-advantages { flex: 1; min-width: 280px; }
+.adv-item {
+  display: flex; gap: 16px; padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.adv-item:last-child { border-bottom: none; }
+.adv-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: var(--blue-pale); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.adv-item h4 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+.adv-item p  { font-size: .85rem; color: var(--text-mid); line-height: 1.5; }
+.moat-badge {
+  display: inline-block; font-size: .7rem; font-weight: 700;
+  background: var(--blue-pale); color: var(--blue);
+  padding: 2px 8px; border-radius: 6px; margin-left: 8px;
+}
+
+/* ── APP PROTOTYPE ──────────────────────────── */
+#prototype { background: linear-gradient(160deg, #0f2d5e 0%, #1B4F8A 60%, #2E75B6 100%); }
+#prototype .section-label { color: #7ECBFF; }
+#prototype .section-title { color: #fff; }
+#prototype .section-sub   { color: rgba(255,255,255,.7); }
+
+.proto-tabs {
+  display: flex; gap: 0; margin-bottom: 40px;
+  background: rgba(255,255,255,.1); border-radius: 30px;
+  padding: 4px; width: fit-content;
+}
+.proto-tab {
+  padding: 10px 28px; border-radius: 26px;
+  font-size: .92rem; font-weight: 700;
+  cursor: pointer; transition: all .25s;
+  color: rgba(255,255,255,.65); border: none;
+  background: transparent;
+}
+.proto-tab.active { background: #fff; color: var(--blue-dark); }
+
+.phones-wrap {
+  display: flex; gap: 48px; justify-content: center;
+  flex-wrap: wrap; align-items: flex-start;
+}
+
+/* Phone frame */
+.phone-frame {
+  width: 320px; border-radius: 44px;
+  background: #0a0a0a;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 0 1px #333;
+  padding: 16px;
+  flex-shrink: 0;
+}
+.phone-inner {
+  border-radius: 32px; overflow: hidden;
+  height: 620px; background: var(--white);
+  position: relative;
+}
+.phone-notch {
+  position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 110px; height: 28px;
+  background: #0a0a0a; border-radius: 0 0 18px 18px; z-index: 10;
+}
+.phone-status {
+  background: var(--white); padding: 38px 16px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .72rem; font-weight: 600; color: var(--text);
+}
+.phone-screen-wrap {
+  height: calc(100% - 90px); overflow: hidden;
+  position: relative;
+}
+.phone-screen {
+  display: none; height: 100%; flex-direction: column;
+  overflow-y: auto;
+}
+.phone-screen.active { display: flex; }
+.phone-screen::-webkit-scrollbar { display: none; }
+
+/* ── CHILD SCREENS ── */
+.app-topbar {
+  padding: 12px 16px; display: flex;
+  align-items: center; justify-content: space-between;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 5;
+  flex-shrink: 0;
+}
+.topbar-back {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: none; background: var(--bg);
+  cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.topbar-title { font-weight: 800; font-size: .95rem; }
+.topbar-icon  { font-size: 1.3rem; cursor: pointer; }
+
+/* Child Home */
+.child-greeting {
+  padding: 16px 16px 8px;
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  color: #fff; flex-shrink: 0;
+}
+.child-greeting h3 { font-size: 1rem; font-weight: 700; }
+.child-greeting p  { font-size: .8rem; opacity: .8; margin-top: 3px; }
+.seed-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(255,255,255,.2); border-radius: 12px;
+  padding: 4px 10px; font-size: .78rem; font-weight: 700; margin-top: 8px;
+}
+.cat-scroll {
+  display: flex; gap: 10px; padding: 14px 16px;
+  overflow-x: auto; flex-shrink: 0;
+}
+.cat-scroll::-webkit-scrollbar { display: none; }
+.cat-chip {
+  flex-shrink: 0; padding: 8px 14px; border-radius: 20px;
+  background: var(--white); border: 1.5px solid var(--border);
+  font-size: .78rem; font-weight: 700; cursor: pointer;
+  white-space: nowrap; transition: all .2s;
+}
+.cat-chip.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+.item-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; padding: 0 16px 16px; flex: 1;
+}
+.item-card {
+  border-radius: 12px; overflow: hidden;
+  background: var(--white); border: 1px solid var(--border);
+  cursor: pointer; transition: transform .15s;
+}
+.item-card:hover { transform: scale(1.02); }
+.item-thumb {
+  height: 100px; display: flex; align-items: center;
+  justify-content: center; font-size: 2.4rem;
+}
+.item-info { padding: 8px 10px; }
+.item-info .name { font-size: .8rem; font-weight: 700; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item-info .price { font-size: .85rem; color: var(--blue-dark); font-weight: 800; }
+.item-info .school { font-size: .7rem; color: var(--text-light); }
+
+/* Child Detail */
+.detail-img {
+  height: 200px; display: flex; align-items: center;
+  justify-content: center; font-size: 5rem;
+  flex-shrink: 0;
+}
+.detail-body { padding: 16px; flex: 1; }
+.detail-body h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; }
+.detail-price { font-size: 1.5rem; font-weight: 900; color: var(--blue-dark); margin-bottom: 12px; }
+.seller-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; background: var(--bg); border-radius: 10px; margin-bottom: 14px;
+}
+.seller-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.seller-info .nick { font-size: .88rem; font-weight: 700; }
+.seller-info .badge { font-size: .7rem; color: var(--text-light); }
+.detail-desc { font-size: .88rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 16px; }
+.detail-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.tag {
+  padding: 4px 10px; background: var(--blue-pale);
+  color: var(--blue); border-radius: 8px; font-size: .75rem; font-weight: 600;
+}
+.detail-btns { display: flex; gap: 10px; margin-top: auto; padding: 12px 16px; flex-shrink: 0; border-top: 1px solid var(--border); }
+.btn-wish {
+  flex: 1; padding: 12px; border-radius: 12px;
+  border: 2px solid var(--border); background: var(--white);
+  font-weight: 700; font-size: .9rem; cursor: pointer; transition: all .2s;
+}
+.btn-wish:hover { border-color: var(--blue); color: var(--blue); }
+.btn-chat {
+  flex: 2; padding: 12px; border-radius: 12px;
+  background: var(--blue); color: #fff;
+  font-weight: 800; font-size: .9rem; border: none; cursor: pointer;
+  transition: background .2s;
+}
+.btn-chat:hover { background: var(--blue-dark); }
+
+/* Child Chat */
+.chat-body { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
+.chat-body::-webkit-scrollbar { display: none; }
+.bubble-wrap { display: flex; gap: 8px; max-width: 85%; }
+.bubble-wrap.me { align-self: flex-end; flex-direction: row-reverse; }
+.bubble-avatar {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--orange), #FFCC00);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; align-self: flex-end;
+}
+.bubble {
+  padding: 10px 14px; border-radius: 18px;
+  font-size: .85rem; line-height: 1.5;
+}
+.bubble.them { background: var(--bg); color: var(--text); border-radius: 4px 18px 18px 18px; }
+.bubble.me   { background: var(--blue); color: #fff; border-radius: 18px 4px 18px 18px; }
+.bubble-time { font-size: .68rem; color: var(--text-light); margin-top: 4px; }
+.stickers-row {
+  display: flex; gap: 8px; padding: 10px 16px;
+  overflow-x: auto; background: var(--bg); flex-shrink: 0;
+}
+.stickers-row::-webkit-scrollbar { display: none; }
+.sticker { font-size: 1.8rem; cursor: pointer; flex-shrink: 0; }
+.chat-input-row {
+  display: flex; gap: 8px; padding: 10px 16px;
+  border-top: 1px solid var(--border); flex-shrink: 0; align-items: center;
+}
+.chat-input {
+  flex: 1; padding: 10px 14px; border-radius: 20px;
+  border: 1.5px solid var(--border); font-size: .88rem;
+  font-family: inherit;
+}
+.chat-send {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--blue); color: #fff; border: none;
+  cursor: pointer; font-size: 1rem; display: flex; align-items: center;
+  justify-content: center;
+}
+.trade-request-btn {
+  margin: 0 16px 12px; padding: 12px;
+  background: var(--green); color: #fff; border: none;
+  border-radius: 12px; font-weight: 800; font-size: .9rem;
+  cursor: pointer; width: calc(100% - 32px);
+  flex-shrink: 0;
+}
+.safe-note {
+  margin: 0 16px 10px; padding: 10px 12px;
+  background: #FFF8EA; border-radius: 10px;
+  font-size: .75rem; color: #8B5E00;
+  border-left: 3px solid var(--orange); flex-shrink: 0;
+}
+
+/* ── PARENT SCREENS ── */
+.parent-topbar {
+  padding: 12px 16px; background: var(--blue-dark); color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.parent-topbar h3 { font-size: .95rem; font-weight: 800; }
+.notif-badge {
+  background: var(--red); color: #fff;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; font-weight: 800;
+}
+.parent-hero {
+  padding: 18px 16px; background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  color: #fff; flex-shrink: 0;
+}
+.parent-hero .child-name { font-size: .82rem; opacity: .8; margin-bottom: 6px; }
+.parent-hero .child-level { font-size: 1.1rem; font-weight: 800; }
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px; padding: 12px 16px; flex-shrink: 0;
+}
+.stat-mini {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 8px; text-align: center;
+}
+.stat-mini .s-val { font-size: .95rem; font-weight: 900; color: var(--blue-dark); }
+.stat-mini .s-key { font-size: .65rem; color: var(--text-light); margin-top: 2px; }
+.section-head {
+  padding: 12px 16px 6px; font-size: .78rem; font-weight: 800;
+  color: var(--text-light); letter-spacing: 1px; flex-shrink: 0;
+}
+.approval-alert {
+  margin: 0 16px 12px; padding: 14px;
+  background: #FFF3CD; border: 1.5px solid #FFCA28;
+  border-radius: 12px; display: flex; align-items: center; gap: 12px;
+  cursor: pointer; flex-shrink: 0;
+}
+.approval-alert .alert-icon { font-size: 1.6rem; }
+.approval-alert h4 { font-size: .88rem; font-weight: 800; margin-bottom: 2px; }
+.approval-alert p  { font-size: .78rem; color: var(--text-mid); }
+.activity-list { padding: 0 16px; flex: 1; }
+.act-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.act-item:last-child { border-bottom: none; }
+.act-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.act-info { flex: 1; }
+.act-info .act-title { font-size: .85rem; font-weight: 700; margin-bottom: 2px; }
+.act-info .act-sub   { font-size: .75rem; color: var(--text-light); }
+.act-status {
+  font-size: .72rem; font-weight: 700; padding: 4px 8px;
+  border-radius: 6px; flex-shrink: 0;
+}
+.st-ok   { background: #E8F8EE; color: var(--green-dark); }
+.st-wait { background: #FFF3CD; color: #8B5E00; }
+.st-new  { background: var(--blue-pale); color: var(--blue); }
+
+/* Approval screen */
+.approval-img {
+  height: 180px; display: flex; align-items: center;
+  justify-content: center; font-size: 5rem; background: var(--bg); flex-shrink: 0;
+}
+.approval-body { padding: 16px; flex: 1; overflow-y: auto; }
+.approval-body::-webkit-scrollbar { display: none; }
+.approval-item-name { font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }
+.approval-price { font-size: 1.3rem; font-weight: 900; color: var(--blue-dark); margin-bottom: 6px; }
+.ai-suggest {
+  padding: 10px 12px; background: var(--blue-pale);
+  border-radius: 10px; font-size: .78rem; color: var(--blue-dark);
+  margin-bottom: 14px;
+}
+.ai-suggest span { font-weight: 800; }
+.info-row {
+  display: flex; justify-content: space-between; padding: 8px 0;
+  border-bottom: 1px solid var(--border); font-size: .85rem;
+}
+.info-row .info-key { color: var(--text-light); }
+.info-row .info-val { font-weight: 700; }
+.approval-btns { display: flex; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--border); flex-shrink: 0; }
+.btn-reject {
+  flex: 1; padding: 12px; border-radius: 12px;
+  border: 2px solid var(--border); background: var(--white);
+  font-weight: 800; font-size: .9rem; cursor: pointer; color: var(--red);
+  border-color: var(--red);
+}
+.btn-approve {
+  flex: 2; padding: 12px; border-radius: 12px;
+  background: var(--green); color: #fff;
+  font-weight: 800; font-size: .9rem; border: none; cursor: pointer;
+}
+
+/* History screen */
+.history-summary {
+  margin: 12px 16px; padding: 16px;
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  border-radius: 14px; color: #fff; flex-shrink: 0;
+}
+.history-summary h4 { font-size: .82rem; opacity: .8; margin-bottom: 8px; }
+.h-nums { display: flex; gap: 16px; }
+.h-num .val { font-size: 1.4rem; font-weight: 900; }
+.h-num .key { font-size: .7rem; opacity: .75; }
+.savings-bar {
+  height: 8px; background: rgba(255,255,255,.25);
+  border-radius: 4px; margin-top: 10px; overflow: hidden;
+}
+.savings-fill {
+  height: 100%; width: 68%; background: var(--green);
+  border-radius: 4px; animation: fillbar 1.5s ease-out;
+}
+@keyframes fillbar { from { width: 0; } }
+.eco-badge-row {
+  display: flex; gap: 8px; padding: 0 16px 12px; flex-shrink: 0;
+}
+.eco-badge {
+  flex: 1; padding: 10px; border-radius: 10px;
+  text-align: center; font-size: .75rem;
+}
+.eco-green { background: #E8F8EE; color: var(--green-dark); font-weight: 700; }
+.eco-blue  { background: var(--blue-pale); color: var(--blue-dark); font-weight: 700; }
+.history-list { padding: 0 16px; flex: 1; }
+.hist-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 0; border-bottom: 1px solid var(--border);
+}
+.hist-item:last-child { border-bottom: none; }
+.hist-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.hist-info { flex: 1; }
+.hist-info .h-name { font-size: .85rem; font-weight: 700; }
+.hist-info .h-date { font-size: .72rem; color: var(--text-light); }
+.hist-amount { font-size: .9rem; font-weight: 800; }
+.amount-sell { color: var(--green-dark); }
+.amount-buy  { color: var(--blue); }
+
+/* ── Phone Nav ── */
+.phone-nav {
+  display: flex; justify-content: space-around;
+  padding: 10px 0 6px; border-top: 1px solid var(--border);
+  background: var(--white); flex-shrink: 0;
+  position: sticky; bottom: 0; z-index: 5;
+}
+.phone-nav-btn {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 10px;
+  border: none; background: transparent; font-family: inherit;
+  color: var(--text-light); font-size: .65rem; transition: color .2s;
+}
+.phone-nav-btn .nav-ico { font-size: 1.3rem; line-height: 1; }
+.phone-nav-btn.active { color: var(--blue); }
+
+.phone-label {
+  text-align: center; color: rgba(255,255,255,.7);
+  font-size: .88rem; font-weight: 600; margin-top: 14px;
+}
+
+/* ── CTA ────────────────────────────────────── */
+#cta { background: var(--white); text-align: center; }
+.cta-inner {
+  max-width: 680px; margin: 0 auto;
+  background: linear-gradient(135deg, #0f2d5e 0%, var(--blue) 100%);
+  border-radius: 28px; padding: 60px 48px; color: #fff;
+  box-shadow: var(--shadow-lg);
+}
+.cta-inner .section-label { color: #7ECBFF; }
+.cta-inner .section-title { color: #fff; font-size: 2rem; }
+.cta-inner .section-sub   { color: rgba(255,255,255,.75); margin-bottom: 36px; max-width: 100%; }
+.invest-highlight {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 16px; padding: 24px 32px; margin-bottom: 36px;
+  display: inline-block;
+}
+.invest-highlight .amount { font-size: 2.6rem; font-weight: 900; color: #7ECBFF; }
+.invest-highlight .round  { font-size: 1rem; opacity: .8; margin-top: 4px; }
+.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  background: #fff; color: var(--blue-dark);
+  padding: 14px 32px; border-radius: 30px;
+  font-weight: 800; font-size: 1rem; text-decoration: none;
+  transition: transform .2s;
+}
+.btn-white:hover { transform: translateY(-2px); }
+.btn-outline-white {
+  border: 2px solid rgba(255,255,255,.5); color: #fff;
+  padding: 14px 32px; border-radius: 30px;
+  font-weight: 700; font-size: 1rem; text-decoration: none;
+  transition: background .2s;
+}
+.btn-outline-white:hover { background: rgba(255,255,255,.12); }
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  background: #0a1628; color: rgba(255,255,255,.5);
+  padding: 36px 5%; text-align: center; font-size: .88rem;
+}
+footer .f-logo { font-size: 1.2rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+footer a { color: rgba(255,255,255,.5); text-decoration: none; margin: 0 10px; }
+footer a:hover { color: var(--blue-light); }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .section-title { font-size: 1.8rem; }
+  .phones-wrap { flex-direction: column; align-items: center; }
+  .pos-map { width: 300px; height: 300px; }
+  .market-circles { margin: 0 auto; }
+  .c-tam { width: 240px; height: 240px; }
+  .c-sam { width: 175px; height: 175px; }
+  .c-som { width: 110px; height: 110px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">🌱</div>
+    아이마켓
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problem">문제</a></li>
+    <li><a href="#solution">솔루션</a></li>
+    <li><a href="#features">기능</a></li>
+    <li><a href="#market">시장</a></li>
+    <li><a href="#prototype">앱 미리보기</a></li>
+  </ul>
+  <a class="nav-cta" href="#cta">투자 문의</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <span class="hero-float">🧸</span>
+  <span class="hero-float">📚</span>
+  <span class="hero-float">✏️</span>
+  <span class="hero-float">⚽</span>
+  <span class="hero-float">🎨</span>
+  <div class="hero-content">
+    <div class="hero-badge">🇰🇷 대한민국 최초 아동 전용 C2C 플랫폼</div>
+    <h1 class="hero-title">
+      아이들이 직접<br>
+      <span>사고 파는</span><br>
+      안전한 중고거래
+    </h1>
+    <p class="hero-sub">
+      보호자가 함께하는 이중 승인 구조로 안전하게.<br>
+      학교·동네 기반으로 신뢰하며.<br>
+      거래하면서 경제를 배우는 — 아이마켓.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#prototype">앱 미리보기</a>
+      <a class="btn-secondary" href="#cta">투자 문의하기</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">24조</span>
+        <span class="label">국내 중고거래 시장</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">330만</span>
+        <span class="label">타깃 아동 인구</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">0</span>
+        <span class="label">현재 직접 경쟁자</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-label">Problem</div>
+  <h2 class="section-title">아이들에게는<br>중고거래 플랫폼이 없다</h2>
+  <p class="section-sub">당근마켓, 번개장터 모두 만 14세 미만 가입 불가.<br>아이들은 대안이 없습니다.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">🚫</div>
+      <h3>성인 중심 플랫폼의 배제</h3>
+      <p>국내 모든 중고거래 플랫폼은 만 14세 미만 가입이 불가합니다. 아이들이 쓰다 남긴 물건은 부모 대리 거래나 폐기에 의존할 수밖에 없습니다.</p>
+      <div class="stat">📊 국내 아동 특화 C2C 플랫폼: 0개</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🗑️</div>
+      <h3>아동 소비재의 막대한 낭비</h3>
+      <p>아동 1인당 연간 완구·교육 소비는 50만 원 이상. 대부분의 제품이 1~2년 내 사용 중단 후 방치되거나 폐기됩니다. 재활용률이 현저히 낮습니다.</p>
+      <div class="stat">💰 연간 아동 완구 시장: 2조 4천억 원</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">📖</div>
+      <h3>체험형 경제교육의 부재</h3>
+      <p>부모 73%가 자녀 경제교육에 관심이 있지만, 실제 거래 경험을 통한 체험형 교육 기회는 일상에서 거의 불가능합니다.</p>
+      <div class="stat">📈 금융교육 관심 학부모: 73% (2023)</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="section-label">Solution</div>
+  <h2 class="section-title">보호자 이중 승인 구조로<br>세상에서 가장 안전한 거래</h2>
+  <p class="section-sub">아이가 직접 등록하고, 부모가 승인하고, 학교·동네 안에서만 거래합니다.</p>
+  <div class="flow-wrap">
+    <div class="flow-step">
+      <div class="step-icon">📸</div>
+      <div class="step-num">1</div>
+      <h4>아이가 등록</h4>
+      <p>사진 촬영 + 음성 입력으로 쉽게</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-icon">👨‍👩‍👧</div>
+      <div class="step-num">2</div>
+      <h4>보호자 확인</h4>
+      <p>푸시 알림으로 내용 검토</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-icon">✅</div>
+      <div class="step-num">3</div>
+      <h4>게시 공개</h4>
+      <p>승인 즉시 학교·동네 노출</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-icon">💬</div>
+      <div class="step-num">4</div>
+      <h4>스티커 채팅</h4>
+      <p>개인정보 자동 차단 채팅</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-icon">🏫</div>
+      <div class="step-num">5</div>
+      <h4>안전 직거래</h4>
+      <p>학교·도서관 등 안전 장소만</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-icon">🌱</div>
+      <div class="step-num">6</div>
+      <h4>씨앗 적립</h4>
+      <p>거래 완료 후 포인트·배지</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">아이마켓만의<br>핵심 기능</h2>
+  <p class="section-sub">아동의 인지 발달 수준에 맞게 설계된, 성인 앱의 단순화가 아닌 완전히 새로운 경험.</p>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon fi-1">🔐</div>
+      <h3>아이 전용 계정</h3>
+      <p>보호자 계정에 연동된 서브 계정으로 닉네임·캐릭터만 노출. 개인정보는 절대 공개되지 않습니다.</p>
+      <ul>
+        <li>실명·사진 비공개</li>
+        <li>학교 인증은 보호자가 진행</li>
+        <li>저학년/고학년 UI 자동 조정</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-2">📍</div>
+      <h3>학교·동네 기반 매칭</h3>
+      <p>같은 학교 또는 반경 1~3km 이내 아이들끼리만 거래. 낯선 성인과의 접촉을 원천 차단합니다.</p>
+      <ul>
+        <li>학교 단위 우선 매칭</li>
+        <li>안전 거래 장소 목록 제공</li>
+        <li>거래 장소 보호자 확인 필수</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-3">👨‍👩‍👧</div>
+      <h3>보호자 대시보드</h3>
+      <p>자녀의 등록 물품, 채팅 내역, 거래 현황을 한눈에. 모든 거래는 보호자 승인 없이 진행되지 않습니다.</p>
+      <ul>
+        <li>실시간 알림 및 1-tap 승인</li>
+        <li>월간 거래 내역 리포트</li>
+        <li>절약 금액·환경 기여 시각화</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-4">🎮</div>
+      <h3>경제교육 게이미피케이션</h3>
+      <p>거래 자체가 경제 교육이 됩니다. 씨앗 포인트, 등급 배지, 절약 시각화로 재미있게 배웁니다.</p>
+      <ul>
+        <li>씨앗 포인트 → 새싹 → 나무</li>
+        <li>"이번 달 OOO원 아꼈어요!"</li>
+        <li>"탄소 OOkg 줄였어요!" 환경 교육</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="section-label">Market Opportunity</div>
+  <h2 class="section-title">24조 시장에서<br>아무도 없는 블루오션</h2>
+  <p class="section-sub">국내외 어디에도 아동이 직접 거래하는 전용 C2C 플랫폼은 존재하지 않습니다.</p>
+  <div class="market-layout">
+    <div class="market-circles" style="width:300px;height:300px;position:relative;flex-shrink:0;">
+      <div class="circle c-tam">
+        <span class="c-label">TAM</span>
+        <span class="c-val">10조 원</span>
+        <span class="c-desc">아동 소비재 전체</span>
+      </div>
+      <div class="circle c-sam">
+        <span class="c-label">SAM</span>
+        <span class="c-val">3조 원</span>
+        <span class="c-desc">중고 가능 소비재</span>
+      </div>
+      <div class="circle c-som">
+        <span class="c-label">SOM</span>
+        <span class="c-val" style="font-size:1rem;">150억</span>
+        <span class="c-desc" style="font-size:.6rem;">Year 3 목표</span>
+      </div>
+    </div>
+    <div class="market-stats">
+      <div class="market-stat-item">
+        <div class="m-num">330만 명</div>
+        <div class="m-label">국내 만 6~13세 아동 인구 (2024 통계청)</div>
+      </div>
+      <div class="market-stat-item">
+        <div class="m-num">17.4%</div>
+        <div class="m-label">중고거래 시장 연평균 성장률 (2019~2023)</div>
+      </div>
+      <div class="market-stat-item">
+        <div class="m-num">120만 가구</div>
+        <div class="m-label">수도권 아동 보유 가구 — 초기 파일럿 대상</div>
+      </div>
+      <div class="market-stat-item">
+        <div class="m-num">0개</div>
+        <div class="m-label">현재 아동 전용 C2C 중고거래 플랫폼 (국내외 포함)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIZMODEL -->
+<section id="bizmodel">
+  <div class="section-label">Business Model</div>
+  <h2 class="section-title">3단계로 진화하는<br>복합 수익 구조</h2>
+  <p class="section-sub">구독으로 빠르게 시작하고, 규모가 커지면 수수료와 B2B로 확장합니다.</p>
+  <div class="phase-grid">
+    <div class="phase-card ph-1">
+      <div class="phase-num">PHASE 1</div>
+      <h3>프리미엄 구독</h3>
+      <div class="phase-period">Year 1~2 · SaaS형</div>
+      <ul>
+        <li><div class="phase-dot d-1"></div>무료: 월 3건 등록</li>
+        <li><div class="phase-dot d-1"></div>프리미엄: 월 3,900원</li>
+        <li><div class="phase-dot d-1"></div>무제한 등록 + 상단 노출</li>
+        <li><div class="phase-dot d-1"></div>거래 분석 리포트 제공</li>
+      </ul>
+      <div class="phase-revenue pr-1">📈 Year 1 매출 목표: 3,610만 원</div>
+    </div>
+    <div class="phase-card ph-2">
+      <div class="phase-num">PHASE 2</div>
+      <h3>거래 수수료</h3>
+      <div class="phase-period">Year 2~3 · 마켓플레이스형</div>
+      <ul>
+        <li><div class="phase-dot d-2"></div>거래 완료 건당 3% 수수료</li>
+        <li><div class="phase-dot d-2"></div>평균 거래가 8,000원 × 3%</li>
+        <li><div class="phase-dot d-2"></div>안전결제 기능 도입</li>
+        <li><div class="phase-dot d-2"></div>GMV 성장에 비례 확대</li>
+      </ul>
+      <div class="phase-revenue pr-2">📈 Year 2 수수료 목표: 6,552만 원</div>
+    </div>
+    <div class="phase-card ph-3">
+      <div class="phase-num">PHASE 3</div>
+      <h3>B2B 확장</h3>
+      <div class="phase-period">Year 3~ · 데이터·제휴형</div>
+      <ul>
+        <li><div class="phase-dot d-3"></div>교육·완구 브랜드 타겟 광고</li>
+        <li><div class="phase-dot d-3"></div>학교·기관 제휴 이벤트</li>
+        <li><div class="phase-dot d-3"></div>아동 소비 트렌드 B2B 데이터</li>
+        <li><div class="phase-dot d-3"></div>핀테크 용돈 계좌 연동</li>
+      </ul>
+      <div class="phase-revenue pr-3">📈 Year 3 총 매출 목표: 6억 7,556만 원</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION -->
+<section id="competition">
+  <div class="section-label">Competitive Landscape</div>
+  <h2 class="section-title">아무도 없는<br>포지션을 선점합니다</h2>
+  <p class="section-sub">아동 특화 + 중고거래 사분면. 국내외 어디에도 경쟁자가 없습니다.</p>
+  <div class="comp-layout">
+    <div class="pos-map-wrap">
+      <div class="pos-map">
+        <div class="pos-axis-h"></div>
+        <div class="pos-axis-v"></div>
+        <span class="pos-label pos-top">아동 특화</span>
+        <span class="pos-label pos-bottom">성인 범용</span>
+        <span class="pos-label pos-left">중고거래</span>
+        <span class="pos-label pos-right">신품판매</span>
+        <div class="pos-dot pos-aimarket">🌱<br>아이마켓</div>
+        <div class="pos-dot pos-karrot" title="당근마켓">🥕</div>
+        <div class="pos-dot pos-bungae" title="번개장터">⚡</div>
+        <div class="pos-dot pos-jungo"  title="중고나라">🏪</div>
+      </div>
+      <p style="text-align:center;margin-top:12px;font-size:.8rem;color:var(--text-light);">
+        🌱 아이마켓 &nbsp;🥕 당근마켓 &nbsp;⚡ 번개장터 &nbsp;🏪 중고나라
+      </p>
+    </div>
+    <div class="comp-advantages">
+      <div class="adv-item">
+        <div class="adv-icon">🔒</div>
+        <div>
+          <h4>안전 구조 <span class="moat-badge">특허 출원 예정</span></h4>
+          <p>보호자 이중 승인 — 국내 어떤 플랫폼도 갖추지 않은 구조</p>
+        </div>
+      </div>
+      <div class="adv-item">
+        <div class="adv-icon">🎨</div>
+        <div>
+          <h4>아동 전용 UX</h4>
+          <p>성인 앱의 단순화가 아닌, 아동 인지 발달 기반 설계</p>
+        </div>
+      </div>
+      <div class="adv-item">
+        <div class="adv-icon">🏫</div>
+        <div>
+          <h4>학교 네트워크 <span class="moat-badge">높은 전환 비용</span></h4>
+          <p>학교 채널 파트너십으로 강력한 락인 효과 형성</p>
+        </div>
+      </div>
+      <div class="adv-item">
+        <div class="adv-icon">📚</div>
+        <div>
+          <h4>교육적 가치 <span class="moat-badge">ESG</span></h4>
+          <p>거래 자체가 경제·환경 교육 콘텐츠로 작동</p>
+        </div>
+      </div>
+      <div class="adv-item">
+        <div class="adv-icon">⚖️</div>
+        <div>
+          <h4>규제 선점</h4>
+          <p>아동 개인정보보호법 준수 체계를 초기부터 내재화</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP PROTOTYPE -->
+<section id="prototype">
+  <div class="section-label">App Preview</div>
+  <h2 class="section-title">아이마켓을<br>직접 경험해보세요</h2>
+  <p class="section-sub">아이 화면과 보호자 화면을 함께 살펴보세요.</p>
+
+  <div style="display:flex;gap:48px;justify-content:center;flex-wrap:wrap;align-items:flex-start;">
+
+    <!-- CHILD PHONE -->
+    <div style="text-align:center;">
+      <div class="phone-frame">
+        <div class="phone-inner" id="childPhone">
+          <div class="phone-notch"></div>
+          <div class="phone-status">
+            <span>9:41</span><span>🔋</span>
+          </div>
+
+          <!-- Screen 1: Home -->
+          <div class="phone-screen active" id="c-home">
+            <div class="child-greeting">
+              <h3>안녕하세요, 민준이! 👋</h3>
+              <p>오늘도 좋은 거래 해봐요</p>
+              <div class="seed-badge">🌱 씨앗 포인트 240점 · 열매 등급</div>
+            </div>
+            <div class="cat-scroll">
+              <div class="cat-chip active">전체</div>
+              <div class="cat-chip">🧸 장난감</div>
+              <div class="cat-chip">📚 도서</div>
+              <div class="cat-chip">✏️ 문구</div>
+              <div class="cat-chip">⚽ 스포츠</div>
+              <div class="cat-chip">👕 의류</div>
+            </div>
+            <div class="item-grid">
+              <div class="item-card" onclick="childGoTo('c-detail')">
+                <div class="item-thumb" style="background:#EAF3FB;">🤖</div>
+                <div class="item-info">
+                  <div class="name">레고 로봇 세트</div>
+                  <div class="price">8,000원</div>
+                  <div class="school">🏫 한강초 · 0.3km</div>
+                </div>
+              </div>
+              <div class="item-card" onclick="childGoTo('c-detail')">
+                <div class="item-thumb" style="background:#F0FBF0;">📗</div>
+                <div class="item-info">
+                  <div class="name">마법천자문 1~5권</div>
+                  <div class="price">5,000원</div>
+                  <div class="school">🏫 한강초 · 0.5km</div>
+                </div>
+              </div>
+              <div class="item-card" onclick="childGoTo('c-detail')">
+                <div class="item-thumb" style="background:#FFF8EA;">🎨</div>
+                <div class="item-info">
+                  <div class="name">수채화 물감 세트</div>
+                  <div class="price">3,500원</div>
+                  <div class="school">🏫 한강초 · 0.8km</div>
+                </div>
+              </div>
+              <div class="item-card" onclick="childGoTo('c-detail')">
+                <div class="item-thumb" style="background:#FAF0FB;">⚽</div>
+                <div class="item-info">
+                  <div class="name">축구공 (4호)</div>
+                  <div class="price">6,000원</div>
+                  <div class="school">🏫 한강초 · 1.1km</div>
+                </div>
+              </div>
+              <div class="item-card" onclick="childGoTo('c-detail')">
+                <div class="item-thumb" style="background:#FFF8EA;">🎮</div>
+                <div class="item-info">
+                  <div class="name">닌텐도 게임 카트리지</div>
+                  <div class="price">12,000원</div>
+                  <div class="school">🏫 한강초 · 1.3km</div>
+                </div>
+              </div>
+              <div class="item-card" onclick="childGoTo('c-detail')">
+                <div class="item-thumb" style="background:#EAF3FB;">🧩</div>
+                <div class="item-info">
+                  <div class="name">직소퍼즐 500피스</div>
+                  <div class="price">4,000원</div>
+                  <div class="school">🏫 한강초 · 1.5km</div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-nav">
+              <button class="phone-nav-btn active"><span class="nav-ico">🏠</span>홈</button>
+              <button class="phone-nav-btn"><span class="nav-ico">🔍</span>탐색</button>
+              <button class="phone-nav-btn"><span class="nav-ico">📦</span>내 물건</button>
+              <button class="phone-nav-btn"><span class="nav-ico">💬</span>채팅</button>
+            </div>
+          </div>
+
+          <!-- Screen 2: Detail -->
+          <div class="phone-screen" id="c-detail" style="flex-direction:column;">
+            <div class="app-topbar">
+              <button class="topbar-back" onclick="childGoTo('c-home')">←</button>
+              <span class="topbar-title">상품 상세</span>
+              <span class="topbar-icon">❤️</span>
+            </div>
+            <div class="detail-img" style="background:linear-gradient(135deg,#EAF3FB,#C8E0F5);">🤖</div>
+            <div class="detail-body">
+              <h2>레고 테크닉 로봇 세트</h2>
+              <div class="detail-price">8,000원</div>
+              <div class="seller-row">
+                <div class="seller-avatar">🦁</div>
+                <div class="seller-info">
+                  <div class="nick">사자왕</div>
+                  <div class="badge">🌱 열매 등급 · 거래 12회</div>
+                </div>
+                <div style="margin-left:auto;font-size:.75rem;color:var(--text-light);">🏫 한강초</div>
+              </div>
+              <p class="detail-desc">작년에 받은 레고 로봇 세트예요. 한 번 완성하고 다시 분해해서 보관 중이에요. 부품 빠진 거 없고 설명서도 있어요!</p>
+              <div class="detail-tags">
+                <span class="tag">레고</span>
+                <span class="tag">장난감</span>
+                <span class="tag">상태 좋음</span>
+              </div>
+              <div style="padding:10px 0;font-size:.82rem;color:var(--text-light);">
+                📍 거래 장소: 한강초 정문 앞 | ⏰ 등록 3일 전
+              </div>
+            </div>
+            <div class="detail-btns">
+              <button class="btn-wish">❤️ 찜하기</button>
+              <button class="btn-chat" onclick="childGoTo('c-chat')">💬 채팅하기</button>
+            </div>
+          </div>
+
+          <!-- Screen 3: Chat -->
+          <div class="phone-screen" id="c-chat" style="flex-direction:column;">
+            <div class="app-topbar">
+              <button class="topbar-back" onclick="childGoTo('c-detail')">←</button>
+              <span class="topbar-title">사자왕 님과 채팅</span>
+              <span class="topbar-icon">⋯</span>
+            </div>
+            <div class="chat-body">
+              <div class="bubble-wrap">
+                <div class="bubble-avatar">🦁</div>
+                <div>
+                  <div class="bubble them">안녕하세요! 레고 보고 연락드려요 😊</div>
+                  <div class="bubble-time">오후 3:20</div>
+                </div>
+              </div>
+              <div class="bubble-wrap me">
+                <div>
+                  <div class="bubble me">안녕하세요! 관심 가져주셔서 감사해요 🙂</div>
+                  <div class="bubble-time" style="text-align:right;">오후 3:22</div>
+                </div>
+              </div>
+              <div class="bubble-wrap">
+                <div class="bubble-avatar">🦁</div>
+                <div>
+                  <div class="bubble them">혹시 부품 다 있나요?</div>
+                  <div class="bubble-time">오후 3:23</div>
+                </div>
+              </div>
+              <div class="bubble-wrap me">
+                <div>
+                  <div class="bubble me">네! 다 있어요. 설명서도 있고요 📄</div>
+                  <div class="bubble-time" style="text-align:right;">오후 3:25</div>
+                </div>
+              </div>
+              <div class="bubble-wrap">
+                <div class="bubble-avatar">🦁</div>
+                <div>
+                  <div class="bubble them">👍 가격 좀 깎아주실 수 있나요?</div>
+                  <div class="bubble-time">오후 3:26</div>
+                </div>
+              </div>
+            </div>
+            <div class="safe-note">🔒 개인정보(전화번호·주소)는 자동으로 차단돼요</div>
+            <button class="trade-request-btn">✅ 거래 요청하기 (보호자 승인 필요)</button>
+            <div class="stickers-row">
+              <span class="sticker">😊</span><span class="sticker">👍</span>
+              <span class="sticker">🤔</span><span class="sticker">🎉</span>
+              <span class="sticker">💰</span><span class="sticker">🙏</span>
+            </div>
+            <div class="chat-input-row">
+              <input class="chat-input" placeholder="메시지를 입력하세요..." readonly>
+              <button class="chat-send">→</button>
+            </div>
+          </div>
+
+        </div><!-- phone-inner -->
+      </div><!-- phone-frame -->
+      <p class="phone-label">👧 아이 화면</p>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+        <button onclick="childGoTo('c-home')" style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.8rem;">🏠 홈</button>
+        <button onclick="childGoTo('c-detail')" style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.8rem;">📦 상세</button>
+        <button onclick="childGoTo('c-chat')" style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.8rem;">💬 채팅</button>
+      </div>
+    </div>
+
+    <!-- PARENT PHONE -->
+    <div style="text-align:center;">
+      <div class="phone-frame">
+        <div class="phone-inner" id="parentPhone">
+          <div class="phone-notch"></div>
+          <div class="phone-status" style="background:var(--blue-dark);color:#fff;">
+            <span>9:41</span><span>🔋</span>
+          </div>
+
+          <!-- Parent Screen 1: Dashboard -->
+          <div class="phone-screen active" id="p-dash" style="flex-direction:column;">
+            <div class="parent-topbar">
+              <h3>보호자 대시보드</h3>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:1.1rem;cursor:pointer;" onclick="parentGoTo('p-approval')">🔔</span>
+                <div class="notif-badge">1</div>
+              </div>
+            </div>
+            <div class="parent-hero">
+              <div class="child-name">👦 민준이 (초등 3학년)</div>
+              <div class="child-level">🌱 씨앗 → 🍎 열매 등급 달성!</div>
+            </div>
+            <div class="stats-row">
+              <div class="stat-mini">
+                <div class="s-val">12건</div>
+                <div class="s-key">총 거래</div>
+              </div>
+              <div class="stat-mini">
+                <div class="s-val">43,000원</div>
+                <div class="s-key">이번달 절약</div>
+              </div>
+              <div class="stat-mini">
+                <div class="s-val">240점</div>
+                <div class="s-key">씨앗 포인트</div>
+              </div>
+            </div>
+            <div class="section-head">APPROVAL NEEDED</div>
+            <div class="approval-alert" onclick="parentGoTo('p-approval')">
+              <div class="alert-icon">⚠️</div>
+              <div>
+                <h4>승인 대기 1건</h4>
+                <p>레고 로봇 세트 등록 요청</p>
+              </div>
+              <span style="margin-left:auto;color:var(--blue);">→</span>
+            </div>
+            <div class="section-head">RECENT ACTIVITY</div>
+            <div class="activity-list">
+              <div class="act-item">
+                <div class="act-icon" style="background:#F0FBF0;">📚</div>
+                <div class="act-info">
+                  <div class="act-title">마법천자문 1~5권 판매 완료</div>
+                  <div class="act-sub">5,000원 · 어제</div>
+                </div>
+                <div class="act-status st-ok">완료</div>
+              </div>
+              <div class="act-item">
+                <div class="act-icon" style="background:#EAF3FB;">🧸</div>
+                <div class="act-info">
+                  <div class="act-title">곰인형 구매 요청</div>
+                  <div class="act-sub">3,000원 · 2일 전</div>
+                </div>
+                <div class="act-status st-wait">검토중</div>
+              </div>
+              <div class="act-item" onclick="parentGoTo('p-history')">
+                <div class="act-icon" style="background:#FAF0FB;">📊</div>
+                <div class="act-info">
+                  <div class="act-title">5월 거래 내역 보기</div>
+                  <div class="act-sub">총 4건 · 절약 43,000원</div>
+                </div>
+                <div class="act-status st-new">→</div>
+              </div>
+            </div>
+            <div class="phone-nav">
+              <button class="phone-nav-btn active"><span class="nav-ico">🏠</span>홈</button>
+              <button class="phone-nav-btn" onclick="parentGoTo('p-approval')"><span class="nav-ico">✅</span>승인</button>
+              <button class="phone-nav-btn" onclick="parentGoTo('p-history')"><span class="nav-ico">📊</span>내역</button>
+              <button class="phone-nav-btn"><span class="nav-ico">⚙️</span>설정</button>
+            </div>
+          </div>
+
+          <!-- Parent Screen 2: Approval -->
+          <div class="phone-screen" id="p-approval" style="flex-direction:column;">
+            <div class="app-topbar">
+              <button class="topbar-back" onclick="parentGoTo('p-dash')">←</button>
+              <span class="topbar-title">등록 승인 요청</span>
+              <span></span>
+            </div>
+            <div class="approval-img" style="background:linear-gradient(135deg,#EAF3FB,#C8E0F5);">🤖</div>
+            <div class="approval-body">
+              <div class="approval-item-name">레고 테크닉 로봇 세트</div>
+              <div class="approval-price">8,000원</div>
+              <div class="ai-suggest">🤖 AI 가격 분석: 유사 상품 평균 <span>7,500~9,000원</span> — 적정가입니다</div>
+              <div class="info-row">
+                <span class="info-key">카테고리</span>
+                <span class="info-val">장난감</span>
+              </div>
+              <div class="info-row">
+                <span class="info-key">상태</span>
+                <span class="info-val">상태 좋음</span>
+              </div>
+              <div class="info-row">
+                <span class="info-key">거래 장소</span>
+                <span class="info-val">🏫 한강초 정문</span>
+              </div>
+              <div class="info-row">
+                <span class="info-key">등록자</span>
+                <span class="info-val">👦 민준 (사자왕)</span>
+              </div>
+              <div style="margin-top:14px;padding:12px;background:var(--bg);border-radius:10px;font-size:.82rem;color:var(--text-mid);line-height:1.5;">
+                "작년에 받은 레고 로봇 세트예요. 한 번 완성하고 다시 분해해서 보관 중이에요. 부품 빠진 거 없고 설명서도 있어요!"
+              </div>
+            </div>
+            <div class="approval-btns">
+              <button class="btn-reject">✕ 거부</button>
+              <button class="btn-approve" onclick="showApproved()">✓ 승인하기</button>
+            </div>
+          </div>
+
+          <!-- Parent Screen 3: History -->
+          <div class="phone-screen" id="p-history" style="flex-direction:column;">
+            <div class="app-topbar">
+              <button class="topbar-back" onclick="parentGoTo('p-dash')">←</button>
+              <span class="topbar-title">5월 거래 내역</span>
+              <span></span>
+            </div>
+            <div class="history-summary">
+              <h4>📅 2026년 5월 요약</h4>
+              <div class="h-nums">
+                <div class="h-num"><div class="val">4건</div><div class="key">거래 완료</div></div>
+                <div class="h-num"><div class="val">43,000원</div><div class="key">절약 금액</div></div>
+                <div class="h-num"><div class="val">240점</div><div class="key">씨앗 적립</div></div>
+              </div>
+              <div class="savings-bar"><div class="savings-fill"></div></div>
+              <div style="font-size:.72rem;opacity:.75;margin-top:4px;">이번달 절약 목표 63,000원 중 68% 달성!</div>
+            </div>
+            <div class="eco-badge-row">
+              <div class="eco-badge eco-green">🌱 탄소 1.2kg 줄였어요!</div>
+              <div class="eco-badge eco-blue">♻️ 물건 4개 재활용!</div>
+            </div>
+            <div class="section-head">TRANSACTIONS</div>
+            <div class="history-list">
+              <div class="hist-item">
+                <div class="hist-icon" style="background:#F0FBF0;">📚</div>
+                <div class="hist-info">
+                  <div class="h-name">마법천자문 1~5권</div>
+                  <div class="h-date">판매 · 5월 7일</div>
+                </div>
+                <div class="hist-amount amount-sell">+5,000원</div>
+              </div>
+              <div class="hist-item">
+                <div class="hist-icon" style="background:#EAF3FB;">🎨</div>
+                <div class="hist-info">
+                  <div class="h-name">수채화 물감 세트</div>
+                  <div class="h-date">구매 · 5월 5일</div>
+                </div>
+                <div class="hist-amount amount-buy">-3,500원</div>
+              </div>
+              <div class="hist-item">
+                <div class="hist-icon" style="background:#FAF0FB;">🧸</div>
+                <div class="hist-info">
+                  <div class="h-name">테디베어 인형</div>
+                  <div class="h-date">판매 · 5월 2일</div>
+                </div>
+                <div class="hist-amount amount-sell">+4,000원</div>
+              </div>
+              <div class="hist-item">
+                <div class="hist-icon" style="background:#FFF8EA;">⚽</div>
+                <div class="hist-info">
+                  <div class="h-name">미니 농구 골대</div>
+                  <div class="h-date">구매 · 4월 28일</div>
+                </div>
+                <div class="hist-amount amount-buy">-7,000원</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- phone-inner -->
+      </div><!-- phone-frame -->
+      <p class="phone-label">👨‍👩‍👧 보호자 화면</p>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+        <button onclick="parentGoTo('p-dash')" style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.8rem;">🏠 대시보드</button>
+        <button onclick="parentGoTo('p-approval')" style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.8rem;">✅ 승인</button>
+        <button onclick="parentGoTo('p-history')" style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.8rem;">📊 내역</button>
+      </div>
+    </div>
+
+  </div><!-- phones-wrap -->
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="section-label">투자 문의</div>
+    <h2 class="section-title">함께 만들어갈<br>대한민국 최초의 기회</h2>
+    <p class="section-sub">세계 어디에도 없는 아동 전용 C2C 플랫폼.<br>지금이 선점 타이밍입니다.</p>
+    <div class="invest-highlight">
+      <div class="amount">1억 5,000만 원</div>
+      <div class="round">Pre-Seed 라운드 · 2026년 5월</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;">
+      <div style="text-align:center;">
+        <div style="font-size:1.4rem;font-weight:900;color:#7ECBFF;">70%</div>
+        <div style="font-size:.78rem;opacity:.75;">MVP 개발</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:1.4rem;font-weight:900;color:#7ECBFF;">20%</div>
+        <div style="font-size:.78rem;opacity:.75;">파일럿 운영</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:1.4rem;font-weight:900;color:#7ECBFF;">10%</div>
+        <div style="font-size:.78rem;opacity:.75;">법무·인프라</div>
+      </div>
+    </div>
+    <div class="cta-btns">
+      <a class="btn-white" href="mailto:contact@aimarket.kr">✉️ 투자 문의하기</a>
+      <a class="btn-outline-white" href="#">📄 기획서 다운로드</a>
+    </div>
+    <p style="margin-top:24px;font-size:.82rem;opacity:.6;">
+      BEP 예상: Year 4 · Seed 5억 · Series A 20억 로드맵
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">🌱 아이마켓</div>
+  <p>아이들이 직접 사고 파는, 대한민국 최초 아동 전용 C2C 중고거래 플랫폼</p>
+  <p style="margin-top:16px;">
+    <a href="#">서비스 소개</a>
+    <a href="#">팀 소개</a>
+    <a href="#">개인정보처리방침</a>
+    <a href="#">투자 문의</a>
+  </p>
+  <p style="margin-top:20px;">© 2026 아이마켓 (KidsTrade). All rights reserved.</p>
+  <p style="margin-top:6px;font-size:.78rem;">본 사이트는 투자 유치 목적의 데모 페이지입니다.</p>
+</footer>
+
+<script>
+// Child screen navigation
+function childGoTo(screenId) {
+  document.querySelectorAll('#childPhone .phone-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}
+
+// Parent screen navigation
+function parentGoTo(screenId) {
+  document.querySelectorAll('#parentPhone .phone-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}
+
+// Approval success
+function showApproved() {
+  const btn = event.target;
+  btn.textContent = '✓ 승인 완료!';
+  btn.style.background = '#28A745';
+  setTimeout(() => {
+    parentGoTo('p-dash');
+    btn.textContent = '✓ 승인하기';
+    btn.style.background = '';
+  }, 1200);
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Nav active state on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--blue)' : '';
+  });
+});
+
+// Category chip toggle
+document.querySelectorAll('.cat-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.closest('.cat-scroll').querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+// Sticker click
+document.querySelectorAll('.sticker').forEach(s => {
+  s.addEventListener('click', () => {
+    const input = document.querySelector('.chat-input');
+    if (input) input.value = s.textContent;
+  });
+});
+</script>
+</body>
+</html>
