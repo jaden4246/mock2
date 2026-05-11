@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import ChatButton from '@/components/child/ChatButton'
 
 const CATEGORY_EMOJI: Record<string, string> = {
   toy: '🧸', book: '📚', stationery: '✏️',
@@ -47,10 +48,7 @@ export default async function ItemDetailPage({ params }: Props) {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4">
-        <Link href={`/child/home`}
-          className="block w-full bg-blue-600 text-white rounded-2xl py-4 text-center font-black">
-          채팅으로 구매 문의하기 💬
-        </Link>
+        <ChatButton itemId={item.id} />
       </div>
     </div>
   )
