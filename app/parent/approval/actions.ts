@@ -2,6 +2,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createAdminClient } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 function getAdminClient() {
   return createAdminClient(
@@ -10,60 +11,53 @@ function getAdminClient() {
   )
 }
 
-export async function approveItem(formData: FormData) {
+export async function approveItem(formData: FormData): Promise<void> {
   const itemId = formData.get('itemId') as string
-  if (!itemId) return { error: '상품 ID 없음' }
+  if (!itemId) redirect('/parent/approval?error=no-id')
 
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return { error: '로그인 필요' }
+  if (!user) redirect('/login')
 
   // Verify item belongs to this parent's child
   const { data: item } = await supabase.from('items')
     .select('id, seller_child_id').eq('id', itemId).single()
-  if (!item) return { error: '상품을 찾을 수 없습니다' }
+  if (!item) redirect('/parent/approval?error=not-found')
 
   const { data: child } = await supabase.from('children')
     .select('id').eq('id', item.seller_child_id).eq('parent_id', user.id).single()
-  if (!child) return { error: '권한 없음' }
+  if (!child) redirect('/parent/approval?error=no-permission')
 
-  // Use admin client to bypass RLS for status update
   const admin = getAdminClient()
-  const { error } = await admin.from('items')
+  await admin.from('items')
     .update({ status: 'active', approved_at: new Date().toISOString() })
     .eq('id', itemId)
-
-  if (error) return { error: '승인 실패: ' + error.message }
 
   revalidatePath('/parent/approval')
   revalidatePath('/parent/dashboard')
   revalidatePath('/child/home')
-  return { success: true }
 }
 
-export async function rejectItem(formData: FormData) {
+export async function rejectItem(formData: FormData): Promise<void> {
   const itemId = formData.get('itemId') as string
-  if (!itemId) return { error: '상품 ID 없음' }
+  if (!itemId) redirect('/parent/approval?error=no-id')
 
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return { error: '로그인 필요' }
+  if (!user) redirect('/login')
 
   const { data: item } = await supabase.from('items')
     .select('id, seller_child_id').eq('id', itemId).single()
-  if (!item) return { error: '상품을 찾을 수 없습니다' }
+  if (!item) redirect('/parent/approval?error=not-found')
 
   const { data: child } = await supabase.from('children')
     .select('id').eq('id', item.seller_child_id).eq('parent_id', user.id).single()
-  if (!child) return { error: '권한 없음' }
+  if (!child) redirect('/parent/approval?error=no-permission')
 
   const admin = getAdminClient()
-  const { error } = await admin.from('items')
+  await admin.from('items')
     .update({ status: 'rejected' }).eq('id', itemId)
-
-  if (error) return { error: '거부 실패: ' + error.message }
 
   revalidatePath('/parent/approval')
   revalidatePath('/parent/dashboard')
-  return { success: true }
 }
