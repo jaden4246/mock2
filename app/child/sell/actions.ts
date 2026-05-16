@@ -1,6 +1,14 @@
 'use server'
 import { createClient } from '@/lib/supabase/server'
+import { createClient as createAdminClient } from '@supabase/supabase-js'
 import { redirect } from 'next/navigation'
+
+function getAdminClient() {
+  return createAdminClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 export async function createItem(prevState: { error?: string } | null, formData: FormData) {
   const supabase = await createClient()
@@ -20,14 +28,23 @@ export async function createItem(prevState: { error?: string } | null, formData:
   if (!title || title.length < 2) return { error: '제목을 2자 이상 입력해주세요' }
   if (isNaN(price) || price < 0 || price > 100000) return { error: '가격은 0~100,000원 사이여야 합니다' }
 
+  // Upload image using admin client (bypasses storage RLS)
   const image = formData.get('image') as File
   let storagePath = ''
   if (image && image.size > 0) {
-    const ext = image.name.split('.').pop()
+    const ext = image.name.split('.').pop() ?? 'jpg'
     const path = `items/${child.id}/${Date.now()}.${ext}`
-    const { error: uploadError } = await supabase.storage
-      .from('item-images').upload(path, image)
-    if (!uploadError) storagePath = path
+    const admin = getAdminClient()
+    const { error: uploadError } = await admin.storage
+      .from('item-images').upload(path, image, {
+        contentType: image.type || 'image/jpeg',
+        upsert: false,
+      })
+    if (uploadError) {
+      console.error('Upload error:', uploadError.message)
+    } else {
+      storagePath = path
+    }
   }
 
   const { data: item, error } = await supabase.from('items').insert({

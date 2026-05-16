@@ -25,7 +25,7 @@ export default async function ApprovalPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white border-b px-4 py-4 flex items-center gap-3">
         <a href="/parent/dashboard" className="text-gray-500 text-xl">←</a>
-        <h1 className="font-black text-lg">등록 승인 요청</h1>
+        <h1 className="font-black text-lg text-gray-900">등록 승인 요청</h1>
         {(pendingItems?.length ?? 0) > 0 && (
           <span className="ml-auto bg-yellow-400 text-yellow-900 text-xs font-black px-2 py-1 rounded-full">
             {pendingItems!.length}건
@@ -46,29 +46,28 @@ export default async function ApprovalPage() {
                 {CATEGORY_EMOJI[item.category] ?? '📦'}
               </div>
               <div className="p-4">
-                <h3 className="font-black text-base mb-1">{item.title}</h3>
-                <p className="text-blue-800 font-black text-xl mb-2">
+                <p className="text-xs text-gray-500 mb-1">
+                  {(item.children as { nickname: string } | null)?.nickname ?? '자녀'} 의 물건
+                </p>
+                <h3 className="font-black text-base text-gray-900 mb-1">{item.title}</h3>
+                <p className="text-blue-700 font-black text-xl mb-1">
                   {item.price.toLocaleString()}원
                 </p>
                 {item.description && (
-                  <p className="text-sm text-gray-500 mb-4">{item.description}</p>
+                  <p className="text-sm text-gray-600 mb-4">{item.description}</p>
                 )}
-                <div className="flex gap-3">
-                  <form action={async () => {
-                    'use server'
-                    await rejectItem(item.id)
-                  }}>
+                <div className="flex gap-3 mt-3">
+                  <form action={rejectItem}>
+                    <input type="hidden" name="itemId" value={item.id} />
                     <button type="submit"
-                      className="border-2 border-red-400 text-red-500 rounded-xl py-3 px-6 font-bold text-sm">
+                      className="border-2 border-red-400 text-red-500 rounded-xl py-3 px-6 font-bold text-sm active:bg-red-50">
                       ✕ 거부
                     </button>
                   </form>
-                  <form action={async () => {
-                    'use server'
-                    await approveItem(item.id)
-                  }} className="flex-1">
+                  <form action={approveItem} className="flex-1">
+                    <input type="hidden" name="itemId" value={item.id} />
                     <button type="submit"
-                      className="w-full bg-green-500 text-white rounded-xl py-3 font-black text-sm">
+                      className="w-full bg-green-500 text-white rounded-xl py-3 font-black text-sm active:bg-green-600">
                       ✓ 승인하기
                     </button>
                   </form>

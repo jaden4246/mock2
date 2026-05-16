@@ -99,7 +99,7 @@ export default function SellPage() {
                   defaultChecked={i === 0}
                   className="sr-only"
                 />
-                <div className="text-center py-2 px-1 rounded-xl border-2 border-transparent text-sm font-medium has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 hover:bg-gray-50">
+                <div className="text-center py-2 px-1 rounded-xl border-2 border-transparent text-sm font-bold text-gray-700 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700 hover:bg-gray-50">
                   {c.label}
                 </div>
               </label>
