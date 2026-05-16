@@ -89,6 +89,24 @@ export default async function ParentDashboard() {
           <p className="text-sm font-bold">자녀 추가</p>
         </Link>
       </div>
+
+      {child && (
+        <div className="mx-4 mt-3">
+          <p className="text-xs font-bold text-gray-400 mb-2 px-1">아이 화면 바로가기</p>
+          <div className="grid grid-cols-2 gap-3">
+            <Link href="/child/home"
+              className="bg-blue-50 rounded-2xl p-4 border border-blue-100 text-center">
+              <div className="text-2xl mb-1">🏠</div>
+              <p className="text-sm font-bold text-blue-700">아이 홈</p>
+            </Link>
+            <Link href="/child/sell"
+              className="bg-green-50 rounded-2xl p-4 border border-green-100 text-center">
+              <div className="text-2xl mb-1">📦</div>
+              <p className="text-sm font-bold text-green-700">상품 등록</p>
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
