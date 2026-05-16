@@ -17,10 +17,16 @@ export default async function ItemDetailPage({ params }: Props) {
   const supabase = await createClient()
 
   const { data: item } = await supabase
-    .from('items').select('*, children(nickname, avatar)')
+    .from('items').select('*, children(nickname, avatar), item_images(storage_path, display_order)')
     .eq('id', id).eq('status', 'active').single()
 
   if (!item) notFound()
+
+  const images = (item.item_images as { storage_path: string; display_order: number }[] | null) ?? []
+  const firstImage = images.sort((a, b) => a.display_order - b.display_order)[0]
+  const imageUrl = firstImage
+    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/item-images/${firstImage.storage_path}`
+    : null
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -29,8 +35,15 @@ export default async function ItemDetailPage({ params }: Props) {
         <span className="font-black">상품 상세</span>
       </div>
 
-      <div className="h-56 bg-blue-50 flex items-center justify-center text-8xl">
-        {CATEGORY_EMOJI[item.category] ?? '📦'}
+      <div className="h-56 relative overflow-hidden">
+        {imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={imageUrl} alt={item.title} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full bg-blue-50 flex items-center justify-center text-8xl">
+            {CATEGORY_EMOJI[item.category] ?? '📦'}
+          </div>
+        )}
       </div>
 
       <div className="bg-white p-5 mx-4 mt-4 rounded-2xl shadow-sm">
