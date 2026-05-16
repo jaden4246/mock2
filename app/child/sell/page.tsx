@@ -77,14 +77,14 @@ export default function SellPage() {
           placeholder="물건 이름을 써봐요"
           minLength={2}
           required
-          className="bg-white border border-gray-100 rounded-2xl px-4 py-3 text-sm"
+          className="bg-white border border-gray-300 rounded-2xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400"
         />
 
         <textarea
           name="description"
           placeholder="물건 설명을 써봐요 (상태, 특징)"
           rows={3}
-          className="bg-white border border-gray-100 rounded-2xl px-4 py-3 text-sm resize-none"
+          className="bg-white border border-gray-300 rounded-2xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 resize-none focus:outline-none focus:border-blue-400"
         />
 
         <div className="bg-white rounded-2xl p-4">

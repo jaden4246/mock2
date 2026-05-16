@@ -16,11 +16,11 @@ export default function SignupPage() {
         )}
         <form action={action} className="flex flex-col gap-4">
           <input name="name" type="text" placeholder="보호자 이름"
-            className="border border-gray-200 rounded-xl px-4 py-3 text-sm" required />
+            className="border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400" required />
           <input name="email" type="email" placeholder="이메일"
-            className="border border-gray-200 rounded-xl px-4 py-3 text-sm" required />
+            className="border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400" required />
           <input name="password" type="password" placeholder="비밀번호 (8자 이상)"
-            className="border border-gray-200 rounded-xl px-4 py-3 text-sm"
+            className="border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400"
             minLength={8} required />
           <button type="submit" disabled={pending}
             className="bg-blue-600 text-white rounded-xl py-3 font-bold text-sm hover:bg-blue-700 disabled:opacity-50">

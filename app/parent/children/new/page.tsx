@@ -57,7 +57,7 @@ export default function NewChildPage() {
               placeholder="예: 사자왕"
               minLength={2}
               maxLength={10}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400"
               required
             />
           </div>
@@ -70,7 +70,7 @@ export default function NewChildPage() {
               id="school_name"
               name="school_name"
               placeholder="예: 한강초등학교"
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400"
             />
           </div>
 
@@ -81,7 +81,7 @@ export default function NewChildPage() {
             <select
               id="grade"
               name="grade"
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400"
               defaultValue="3"
             >
               {[1, 2, 3, 4, 5, 6].map((g) => (
@@ -100,7 +100,7 @@ export default function NewChildPage() {
               id="district"
               name="district"
               placeholder="예: 마포구 합정동"
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400"
             />
           </div>
 
