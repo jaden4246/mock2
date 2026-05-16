@@ -79,14 +79,14 @@ export default async function ParentDashboard() {
 
       <div className="mx-4 mt-4 grid grid-cols-2 gap-3">
         <Link href="/parent/approval"
-          className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
+          className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm text-center">
           <div className="text-2xl mb-1">✅</div>
-          <p className="text-sm font-bold">승인 관리</p>
+          <p className="text-sm font-bold text-gray-800">승인 관리</p>
         </Link>
         <Link href="/parent/children/new"
-          className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
+          className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm text-center">
           <div className="text-2xl mb-1">➕</div>
-          <p className="text-sm font-bold">자녀 추가</p>
+          <p className="text-sm font-bold text-gray-800">자녀 추가</p>
         </Link>
       </div>
 

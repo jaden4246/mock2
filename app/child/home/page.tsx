@@ -22,7 +22,7 @@ export default async function ChildHomePage({ searchParams }: Props) {
   const { data: child } = await supabase
     .from('children').select('*').eq('parent_id', user!.id).single()
 
-  let query = supabase.from('items').select('*').eq('status', 'active')
+  let query = supabase.from('items').select('*, item_images(storage_path, display_order)').eq('status', 'active')
 
   if (child?.school_name) {
     query = query.eq('school_name', child.school_name)

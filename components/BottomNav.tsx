@@ -15,7 +15,7 @@ export default function BottomNav({ items }: { items: NavItem[] }) {
       {items.map(n => (
         <Link key={n.href} href={n.href}
           className={`flex flex-col items-center gap-0.5 text-xs transition-colors ${
-            pathname.startsWith(n.href) ? 'text-blue-600' : 'text-gray-400'
+            pathname.startsWith(n.href) ? 'text-blue-600' : 'text-gray-600'
           }`}>
           <span className="text-xl">{n.icon}</span>
           <span>{n.label}</span>

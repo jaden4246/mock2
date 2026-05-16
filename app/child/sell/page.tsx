@@ -66,7 +66,6 @@ export default function SellPage() {
             type="file"
             name="image"
             accept="image/*"
-            capture="environment"
             className="hidden"
             onChange={handleFile}
           />
